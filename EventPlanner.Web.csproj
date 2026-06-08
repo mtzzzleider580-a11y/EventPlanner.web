@@ -121,6 +121,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PruebaController.cs" />
+    <Compile Include="Data\Conexion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -157,7 +159,6 @@
     <Content Include="02_BaseDatos\.gitkeep" />
     <Content Include="03_Reportes\.gitkeep" />
     <Content Include="04_Recursos\.gitkeep" />
-    <Content Include="Data\.gitkeep" />
     <Content Include="Helpers\.gitkeep" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="Documents" />
