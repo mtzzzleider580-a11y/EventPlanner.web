@@ -1,0 +1,58 @@
+﻿@model EventPlanner.Web.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Iniciar Sesión";
+}
+
+<link href="~/Content/Registro.css" rel="stylesheet" />
+
+<div class="contenedor-registro">
+
+
+    <h2 class="titulo-registro">
+        Iniciar Sesión
+    </h2>
+
+    <form method="post">
+
+        <div class="grupo-formulario">
+            <label>Correo Electrónico</label>
+            <input type="email"
+                   name="Correo"
+                   required />
+        </div>
+
+        <div class="grupo-formulario">
+            <label>Contraseña</label>
+            <input type="password"
+                   name="Contrasena"
+                   required />
+        </div>
+
+        <button type="submit" class="btn-registro">
+            Ingresar
+        </button>
+
+    </form>
+
+    <div style="text-align:center; margin-top:20px;">
+
+        ¿No tienes cuenta?
+
+        <br />
+
+        <a href="/Usuario/Registro"
+           style="color:#00843D;font-weight:bold;text-decoration:none;">
+            Regístrate aquí
+        </a>
+
+    </div>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="mensaje-exito">
+            @ViewBag.Mensaje
+        </div>
+    }
+
+</div>
