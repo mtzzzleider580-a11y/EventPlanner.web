@@ -1,0 +1,44 @@
+﻿using EventPlanner.Web.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+
+namespace EventPlanner.Web.Data
+{
+    public class ProgramaFormacionDAO
+    {
+
+        public List<ProgramaFormacion> Listar()
+        {
+            List<ProgramaFormacion> lista = new List<ProgramaFormacion>();
+
+            Conexion conexion = new Conexion();
+
+            using (SqlConnection cn = conexion.ObtenerConexion())
+            {
+                cn.Open();
+
+                string sql = "SELECT * FROM ProgramaFormacion";
+
+                SqlCommand cmd = new SqlCommand(sql, cn);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    lista.Add(new ProgramaFormacion
+                    {
+                        idProgramaFormacion = (int)dr["idProgramaFormacion"],
+                        NombrePrograma = dr["NombrePrograma"].ToString()
+                    });
+                }
+            }
+
+            return lista;
+        }
+    }
+}
