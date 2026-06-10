@@ -15,10 +15,10 @@
 
     <form method="post">
 
-        <div class="grupo-formulario">
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
             <label>Tipo Documento</label>
 
-            <select name="TipoDocumento" id="TipoDocumento" required>
+            <select name="TipoDocumento" id="TipoDocumento" required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;">
                 <option value="">Seleccione</option>
                 <option value="CC">Cédula de Ciudadanía</option>
                 <option value="TI">Tarjeta de Identidad</option>
@@ -27,51 +27,48 @@
             </select>
         </div>
 
-        <div class="grupo-formulario">
-            <label>Número Documento</label>
+    
 
-            <input type="text"
-                   name="NumeroDocumento"
-                   id="NumeroDocumento"
-                   required />
-
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
+            <label style="display: block; margin-bottom: 5px;">NúmeroDocumento</label>
+            <input type="text" name="NúmeroDocumento" id="NúmeroDocumento" required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;" />
             <div id="mensajeDocumento"></div>
         </div>
 
-        <div class="grupo-formulario">
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
             <label>Nombre Completo</label>
 
             <input type="text"
                    name="NombreCompleto"
                    id="NombreCompleto"
-                   required />
+                   required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;" />
 
             <div id="mensajeNombre"></div>
         </div>
 
-        <div class="grupo-formulario">
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
             <label>Correo Electrónico</label>
-            <input type="email" name="Correo" id="Correo" required />
+            <input type="email" name="Correo" id="Correo" required  style="display: block; margin: 0 auto; width: 100%; max-width: 340px;"/>
 
             <div id="mensajeCorreo"></div>
         </div>
 
-        <div class="grupo-formulario">
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
             <label>Ficha</label>
 
             <input type="text"
                    name="Ficha"
                    id="Ficha"
-                   required />
+                   required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;"/>
 
             <div id="mensajeFicha"></div>
         </div>
 
 
-        <div class="grupo-formulario">
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
             <label>Jornada</label>
 
-            <select name="Jornada" id="Jornada" required>
+            <select name="Jornada" id="Jornada" required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;">
                 <option value="">Seleccione</option>
                 <option value="Mañana">Mañana</option>
                 <option value="Tarde">Tarde</option>
@@ -79,10 +76,10 @@
             </select>
         </div>
 
-        <div class="grupo-formulario">
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
             <label>Programa de Formación</label>
 
-            <select name="idProgramaFormacion" id="ProgramaFormacion" required>
+            <select name="idProgramaFormacion" id="ProgramaFormacion" required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;">
 
                 <option value="">
                     Seleccione Programa
@@ -98,24 +95,24 @@
             </select>
         </div>
 
-        <div class="grupo-formulario">
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
             <label>Contraseña</label>
 
             <input type="password"
                    name="Contrasena"
                    id="Contrasena"
-                   required />
+                   required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;" />
 
             <div id="mensajeContrasena"></div>
         </div>
 
 
-        <div class="grupo-formulario">
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
             <label>Confirmar Contraseña</label>
 
             <input type="password"
                    id="ConfirmarContrasena"
-                   required />
+                   required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;" />
 
             <div id="mensajeConfirmacion"></div>
         </div>
