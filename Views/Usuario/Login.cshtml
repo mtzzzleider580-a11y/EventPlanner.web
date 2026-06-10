@@ -18,18 +18,21 @@
         <div class="grupo-formulario">
             <label>Correo Electrónico</label>
             <input type="email"
-                   name="Correo"
-                   required />
+                   name="Correo" id="Correo" required />
+            <div id="mensajeCorreo"></div>
         </div>
 
         <div class="grupo-formulario">
             <label>Contraseña</label>
             <input type="password"
-                   name="Contrasena"
-                   required />
+                   name="Contrasena" id="Contrasena" required />
+            <div id="mensajeContrasena"></div>
         </div>
 
-        <button type="submit" class="btn-registro">
+        <button type="submit"
+                class="btn-registro"
+                id="btnIngresar"
+                disabled>
             Ingresar
         </button>
 
@@ -54,5 +57,64 @@
             @ViewBag.Mensaje
         </div>
     }
+
+    <script>
+
+const correo = document.getElementById("Correo");
+const contrasena = document.getElementById("Contrasena");
+
+const mensajeCorreo =document.getElementById("mensajeCorreo");
+const mensajeContrasena =document.getElementById("mensajeContrasena");
+const btnIngresar =document.getElementById("btnIngresar");
+
+function validarFormulario()
+{
+    let correoValido =
+        correo.value.endsWith("@@soy.sena.edu.co");
+
+    let contrasenaValida =
+        contrasena.value.length >= 6 &&
+        contrasena.value.length <= 8;
+
+    btnIngresar.disabled =
+        !(correoValido && contrasenaValida);
+}
+
+correo.addEventListener("input", function ()
+{
+    if (correo.value.endsWith("@@soy.sena.edu.co"))
+    {
+        mensajeCorreo.innerHTML =
+            "<div class='alerta-ok'>✓ Correo válido</div>";
+    }
+    else
+    {
+        mensajeCorreo.innerHTML =
+            "<div class='alerta-error'>✗ Debe usar correo institucional</div>";
+    }
+
+    validarFormulario();
+});
+
+contrasena.addEventListener("input", function ()
+{
+    if (contrasena.value.length >= 6 &&
+        contrasena.value.length <= 8)
+    {
+        mensajeContrasena.innerHTML =
+            "<div class='alerta-ok'>✓ Contraseña válida</div>";
+    }
+    else
+    {
+        mensajeContrasena.innerHTML =
+            "<div class='alerta-error'>✗ Debe tener entre 6 y 8 caracteres</div>";
+    }
+
+    validarFormulario();
+});
+
+validarFormulario();
+
+    </script>
 
 </div>

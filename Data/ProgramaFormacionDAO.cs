@@ -22,7 +22,8 @@ namespace EventPlanner.Web.Data
             {
                 cn.Open();
 
-                string sql = "SELECT * FROM ProgramaFormacion";
+                string sql = @"SELECT * FROM ProgramaFormacion
+                WHERE NombrePrograma <> 'ADMINISTRACION SISTEMA'";
 
                 SqlCommand cmd = new SqlCommand(sql, cn);
 

@@ -20,32 +20,8 @@ namespace EventPlanner.Web.Data
                 {
                     cn.Open();
 
-                    string sql = @"INSERT INTO Usuario
-                    (
-                        idProgramaFormacion,
-                        TipoDocumento,
-                        NumeroDocumento,
-                        NombreCompleto,
-                        Correo,
-                        Ficha,
-                        Jornada,
-                        Rol,
-                        FechaRegistro,
-                        Contrasena
-                    )
-                    VALUES
-                    (
-                        @idProgramaFormacion,
-                        @TipoDocumento,
-                        @NumeroDocumento,
-                        @NombreCompleto,
-                        @Correo,
-                        @Ficha,
-                        @Jornada,
-                        @Rol,
-                        @FechaRegistro,
-                        @Contrasena
-                    )";
+                    string sql = @"INSERT INTO Usuario(idProgramaFormacion,TipoDocumento,NumeroDocumento,NombreCompleto,Correo,Ficha,Jornada,Rol,FechaRegistro,Contrasena)
+                    VALUES (@idProgramaFormacion,@TipoDocumento,@NumeroDocumento,@NombreCompleto,@Correo,@Ficha,@Jornada,@Rol,@FechaRegistro,@Contrasena)";
 
                     SqlCommand cmd = new SqlCommand(sql, cn);
 
@@ -108,6 +84,60 @@ namespace EventPlanner.Web.Data
             return usuario;
         }
 
+        public bool ExisteCorreo(string correo)
+        {
+            bool existe = false;
+
+            Conexion conexion = new Conexion();
+
+            using (SqlConnection cn = conexion.ObtenerConexion())
+            {
+                cn.Open();
+
+                string sql = @"SELECT COUNT(*)
+                       FROM Usuario
+                       WHERE Correo = @Correo";
+
+                SqlCommand cmd = new SqlCommand(sql, cn);
+
+                cmd.Parameters.AddWithValue("@Correo", correo);
+
+                int cantidad = (int)cmd.ExecuteScalar();
+
+                existe = cantidad > 0;
+            }
+
+            return existe;
+        }
+
+        public bool ExisteDocumento(string numeroDocumento)
+        {
+            bool existe = false;
+
+            Conexion conexion = new Conexion();
+
+            using (SqlConnection cn = conexion.ObtenerConexion())
+            {
+                cn.Open();
+
+                string sql = @"SELECT COUNT(*)
+                       FROM Usuario
+                       WHERE NumeroDocumento = @NumeroDocumento";
+
+                SqlCommand cmd = new SqlCommand(sql, cn);
+
+                cmd.Parameters.AddWithValue(
+                    "@NumeroDocumento",
+                    numeroDocumento
+                );
+
+                int cantidad = (int)cmd.ExecuteScalar();
+
+                existe = cantidad > 0;
+            }
+
+            return existe;
+        }
 
     }
 }

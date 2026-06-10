@@ -29,6 +29,34 @@ namespace EventPlanner.Web.Controllers
 
             UsuarioDAO dao = new UsuarioDAO();
 
+            if (dao.ExisteCorreo(usuario.Correo))
+            {
+                ViewBag.Mensaje =
+                    "Ya existe un usuario registrado con este correo";
+
+                ProgramaFormacionDAO DaoPrograma =
+                    new ProgramaFormacionDAO();
+
+                ViewBag.Programas =
+                    DaoPrograma.Listar();
+                return View();
+            }
+
+            if (dao.ExisteDocumento(usuario.NumeroDocumento))
+            {
+                ViewBag.TipoMensaje = "error";
+
+                ViewBag.Mensaje =
+                    "Ya existe un usuario registrado con este número de documento";
+
+                ProgramaFormacionDAO daPrograma =
+                    new ProgramaFormacionDAO();
+
+                ViewBag.Programas = daPrograma.Listar();
+
+                return View();
+            }
+
             bool registrado = dao.Registrar(usuario);
 
             ProgramaFormacionDAO daoPrograma = new ProgramaFormacionDAO();
