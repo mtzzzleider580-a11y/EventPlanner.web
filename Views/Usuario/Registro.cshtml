@@ -30,8 +30,8 @@
     
 
         <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
-            <label style="display: block; margin-bottom: 5px;">NúmeroDocumento</label>
-            <input type="text" name="NúmeroDocumento" id="NúmeroDocumento" required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;" />
+            <label style="display: block; margin-bottom: 5px;">NumeroDocumento</label>
+            <input type="text" name="NumeroDocumento" id="NumeroDocumento" required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;" />
             <div id="mensajeDocumento"></div>
         </div>
 
@@ -152,11 +152,14 @@
 
         const documento = document.getElementById("NumeroDocumento");
         const ficha = document.getElementById("Ficha");
+        const nombre = document.getElementById("NombreCompleto");
+
+        console.log(documento);
+        console.log(ficha);
+        console.log(nombre);
 
         const mensajeDocumento = document.getElementById("mensajeDocumento");
         const mensajeFicha = document.getElementById("mensajeFicha");
-
-        const nombre = document.getElementById("NombreCompleto");
         const mensajeNombre = document.getElementById("mensajeNombre");
 
         const btnRegistrar = document.getElementById("btnRegistrar");
@@ -179,11 +182,11 @@
                 confirmar.value !== "";
 
             let documentoValido =
-                documento.value.length > 0 &&
+                documento.value.length >= 6 &&
                 documento.value.length <= 10;
 
             let fichaValida =
-                ficha.value.length > 0 &&
+                ficha.value.length >= 6 &&
                 ficha.value.length <= 8;
 
             let nombreValido =
@@ -275,17 +278,19 @@
         // VALIDACION NUMERO DOCUMENTO
         documento.addEventListener("input", function () {
 
-            documento.value = documento.value.replace(/\D/g, "");
+            documento.value = documento.value.replace(/[^0-9]/g, "");
 
-            if (documento.value.length <= 10) {
+            if (documento.value.length > 10) {
+                documento.value = documento.value.substring(0, 10);
+            }
 
+            if (documento.value.length >= 6) {
                 mensajeDocumento.innerHTML =
                     "<div class='alerta-ok'>✓ Documento válido</div>";
             }
             else {
-
                 mensajeDocumento.innerHTML =
-                    "<div class='alerta-error'>✗ Máximo 10 dígitos</div>";
+                    "<div class='alerta-error'>✗ Mínimo 6 y máximo 10 dígitos</div>";
             }
 
             validarFormulario();
@@ -295,17 +300,19 @@
         // VALIDACION FICHA
         ficha.addEventListener("input", function () {
 
-            ficha.value = ficha.value.replace(/\D/g, "");
+            ficha.value = ficha.value.replace(/[^0-9]/g, "");
 
-            if (ficha.value.length <= 8) {
+            if (ficha.value.length > 8) {
+                ficha.value = ficha.value.substring(0, 8);
+            }
 
+            if (ficha.value.length >= 6) {
                 mensajeFicha.innerHTML =
                     "<div class='alerta-ok'>✓ Ficha válida</div>";
             }
             else {
-
                 mensajeFicha.innerHTML =
-                    "<div class='alerta-error'>✗ Máximo 8 dígitos</div>";
+                    "<div class='alerta-error'>✗ Mínimo 6 y máximo 8 dígitos</div>";
             }
 
             validarFormulario();
@@ -315,7 +322,8 @@
         // VALIDACION NOMBRE
         nombre.addEventListener("input", function () {
 
-            nombre.value = nombre.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
+            nombre.value =
+                nombre.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/g, "");
 
             if (nombre.value.trim().length >= 3) {
 
@@ -325,7 +333,7 @@
             else {
 
                 mensajeNombre.innerHTML =
-                    "<div class='alerta-error'>✗ Ingrese nombre y apellido</div>";
+                    "<div class='alerta-error'>✗ Solo letras y espacios</div>";
             }
 
             validarFormulario();
@@ -349,6 +357,8 @@
 
         validarFormulario();
 
+        
+       
 
     </script>
 
