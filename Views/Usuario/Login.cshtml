@@ -1,0 +1,119 @@
+﻿@model EventPlanner.Web.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Iniciar Sesión";
+}
+
+<link href="~/Content/Registro.css" rel="stylesheet" />
+
+<div class="contenedor-registro">
+
+
+    <h2 class="titulo-registro">
+        Iniciar Sesión
+    </h2>
+
+    <form method="post">
+
+        <div class="grupo-formulario" style="text-align: center;">
+            <label style="display: block; margin-bottom: 5px;">Correo Electrónico</label>
+            <input type="email" name="Correo" id="Correo" required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;" />
+            <div id="mensajeCorreo"></div>
+        </div>
+
+
+        <div class="grupo-formulario" style="text-align: center; margin-top: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Contraseña</label>
+            <input type="password" name="Contrasena" id="Contrasena" required style="display: block; margin: 0 auto; width: 100%; max-width: 340px;" />
+            <div id="mensajeContrasena"></div>
+        </div>
+
+        <button type="submit"
+                class="btn-registro"
+                id="btnIngresar"
+                disabled>
+            Ingresar
+        </button>
+
+    </form>
+
+    <div style="text-align:center; margin-top:20px;">
+
+        ¿No tienes cuenta?
+
+        <br />
+
+        <a href="/Usuario/Registro"
+           style="color:#00843D;font-weight:bold;text-decoration:none;">
+            Regístrate aquí
+        </a>
+
+    </div>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="mensaje-exito">
+            @ViewBag.Mensaje
+        </div>
+    }
+
+    <script>
+
+const correo = document.getElementById("Correo");
+const contrasena = document.getElementById("Contrasena");
+
+const mensajeCorreo =document.getElementById("mensajeCorreo");
+const mensajeContrasena =document.getElementById("mensajeContrasena");
+const btnIngresar =document.getElementById("btnIngresar");
+
+function validarFormulario()
+{
+    let correoValido =
+        correo.value.endsWith("@@soy.sena.edu.co");
+
+    let contrasenaValida =
+        contrasena.value.length >= 6 &&
+        contrasena.value.length <= 8;
+
+    btnIngresar.disabled =
+        !(correoValido && contrasenaValida);
+}
+
+correo.addEventListener("input", function ()
+{
+    if (correo.value.endsWith("@@soy.sena.edu.co"))
+    {
+        mensajeCorreo.innerHTML =
+            "<div class='alerta-ok'>✓ Correo válido</div>";
+    }
+    else
+    {
+        mensajeCorreo.innerHTML =
+            "<div class='alerta-error'>✗ Debe usar correo institucional</div>";
+    }
+
+    validarFormulario();
+});
+
+contrasena.addEventListener("input", function ()
+{
+    if (contrasena.value.length >= 6 &&
+        contrasena.value.length <= 8)
+    {
+        mensajeContrasena.innerHTML =
+            "<div class='alerta-ok'>✓ Contraseña válida</div>";
+    }
+    else
+    {
+        mensajeContrasena.innerHTML =
+            "<div class='alerta-error'>✗ Debe tener entre 6 y 8 caracteres</div>";
+    }
+
+    validarFormulario();
+});
+
+validarFormulario();
+
+    </script>
+
+</div>
