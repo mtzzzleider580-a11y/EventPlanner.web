@@ -1,4 +1,5 @@
-﻿using EventPlanner.Web.Data;
+﻿
+using EventPlanner.Web.Data;
 using EventPlanner.Web.Models;
 using System;
 using System.Collections.Generic;
