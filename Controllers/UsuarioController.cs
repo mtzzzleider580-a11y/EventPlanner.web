@@ -124,3 +124,4 @@ namespace EventPlanner.Web.Controllers
         }
     }
 }
+// prueba de commit para verificar la funcionalidad del SP-1 en el SP-2
