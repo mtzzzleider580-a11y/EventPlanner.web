@@ -1,0 +1,52 @@
+﻿@model List<EventPlanner.Web.Models.Equipo>
+
+@{
+    ViewBag.Title = "Equipos";
+}
+
+<div class="container mt-4">
+    <h2>Equipos</h2>
+
+    <a href="@Url.Action("Crear","Equipo")" class="btn btn-success mb-3">Crear Equipo</a>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Evento</th>
+                    <th>Nombre</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.idEquipo</td>
+                        <td>@item.NombreEvento</td>
+                        <td>@item.NombreEquipo</td>
+                        <td>@item.CantidadMinima</td>
+                        <td>@item.CantidadMaxima</td>
+                        <td>
+                            <a href="@Url.Action("Editar","Equipo", new { id = item.idEquipo })" class="btn btn-warning btn-xs">Editar</a>
+
+                            @using (Html.BeginForm("Eliminar","Equipo", new { id = item.idEquipo }, FormMethod.Post, new { style = "display:inline" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('¿Seguro de eliminar este equipo?')">Eliminar</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">No hay equipos registrados.</div>
+    }
+</div>

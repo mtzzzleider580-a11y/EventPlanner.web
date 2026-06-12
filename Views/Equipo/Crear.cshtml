@@ -1,0 +1,51 @@
+﻿@model EventPlanner.Web.Models.Equipo
+@using EventPlanner.Web.Models
+
+@{
+    ViewBag.Title = "Crear Equipo";
+    var eventos = ViewBag.Eventos as List<Evento>;
+}
+
+<div class="container mt-4">
+    <h2>Crear Equipo</h2>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-danger">@ViewBag.Mensaje</div>
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label>Evento</label>
+            <select name="idEvento" class="form-control" required>
+                <option value="">Seleccione</option>
+                @foreach (var ev in eventos)
+                {
+                    <option value="@ev.idEvento">@ev.NombreEvento (@ev.FechaEvento.ToString("dd/MM/yyyy"))</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Nombre Equipo</label>
+            <input type="text" name="NombreEquipo" class="form-control" required />
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label>Cantidad Mínima</label>
+                <input type="number" name="CantidadMinima" class="form-control" min="1" required />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Cantidad Máxima</label>
+                <input type="number" name="CantidadMaxima" class="form-control" min="1" required />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="@Url.Action("Index","Equipo")" class="btn btn-secondary">Volver</a>
+    }
+</div>

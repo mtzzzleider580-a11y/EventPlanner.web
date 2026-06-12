@@ -1,0 +1,160 @@
+﻿@using EventPlanner.Web.Models
+
+@{
+    ViewBag.Title = "Panel Administrador";
+    var eventos = ViewBag.Eventos as List<EventPlanner.Web.Models.Evento>;
+}
+
+<div class="container mt-4">
+
+    <!-- Bienvenida -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2>Bienvenido, @ViewBag.Nombre</h2>
+            <p class="text-muted">Rol: @ViewBag.Rol — Panel de Administración</p>
+            <hr />
+        </div>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Total Eventos</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <h1>@(eventos != null ? eventos.Count : 0)</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Eventos Activos</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <h1>@(eventos != null ? eventos.FindAll(e => e.Activo).Count : 0)</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Eventos Inactivos</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <h1>@(eventos != null ? eventos.FindAll(e => !e.Activo).Count : 0)</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opciones -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h4>Opciones</h4>
+            <hr />
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("Crear","Evento")"
+               class="btn btn-success btn-block btn-lg">
+                Crear Evento
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("Index","Evento")"
+               class="btn btn-primary btn-block btn-lg">
+                Gestionar Eventos
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("Index","Equipo")"
+               class="btn btn-warning btn-block btn-lg">
+                Gestionar Equipos
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("Logout","Usuario")"
+               class="btn btn-danger btn-block btn-lg">
+                Cerrar Sesión
+            </a>
+        </div>
+    </div>
+
+    <!-- Tabla eventos -->
+    <div class="row">
+        <div class="col-12">
+            <h4>Eventos Registrados</h4>
+            <hr />
+
+            @if (eventos != null && eventos.Count > 0)
+            {
+                <table class="table table-bordered table-hover table-striped">
+                    <thead class="info">
+                        <tr>
+                            <th>ID</th>
+                            <th>Evento</th>
+                            <th>Tipo</th>
+                            <th>Fecha</th>
+                            <th>Modalidad</th>
+                            <th>Lugar</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in eventos)
+                        {
+                            <tr>
+                                <td>@item.idEvento</td>
+                                <td>@item.NombreEvento</td>
+                                <td>@item.NombreTipoEvento</td>
+                                <td>@item.FechaEvento.ToString("dd/MM/yyyy")</td>
+                                <td>@item.Modalidad</td>
+                                <td>@item.Lugar</td>
+                                <td>
+                                    @if (item.Activo)
+                                    {
+                                        <span class="label label-success">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger">Inactivo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Editar","Evento", new { id = item.idEvento })"
+                                       class="btn btn-warning btn-xs">
+                                        Editar
+                                    </a>
+                                    <a href="@Url.Action("CambiarEstado","Evento", new { id = item.idEvento })"
+                                       class="btn btn-default btn-xs">
+                                        Estado
+                                    </a>
+                                    <form action="@Url.Action("Eliminar","Evento", new { id = item.idEvento })" method="post"
+                                          style="display:inline"
+                                          onsubmit="return confirm('¿Está seguro de eliminar este evento?')">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@item.idEvento" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    No hay eventos registrados aún.
+                    <a href="@Url.Action("Crear","Evento")">Crear el primero</a>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>

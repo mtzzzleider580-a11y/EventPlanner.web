@@ -1,5 +1,4 @@
-﻿
-using EventPlanner.Web.Data;
+﻿using EventPlanner.Web.Data;
 using EventPlanner.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -15,9 +14,7 @@ namespace EventPlanner.Web.Controllers
         public ActionResult Registro()
         {
             ProgramaFormacionDAO daoPrograma = new ProgramaFormacionDAO();
-
             ViewBag.Programas = daoPrograma.Listar();
-
             return View();
         }
 
@@ -25,61 +22,37 @@ namespace EventPlanner.Web.Controllers
         public ActionResult Registro(Usuario usuario)
         {
             usuario.Rol = "APRENDIZ";
-
             usuario.FechaRegistro = DateTime.Now;
-
             UsuarioDAO dao = new UsuarioDAO();
 
             if (dao.ExisteCorreo(usuario.Correo))
             {
-                ViewBag.Mensaje =
-                    "Ya existe un usuario registrado con este correo";
-
-                ProgramaFormacionDAO DaoPrograma =
-                    new ProgramaFormacionDAO();
-
-                ViewBag.Programas =
-                    DaoPrograma.Listar();
+                ViewBag.Mensaje = "Ya existe un usuario registrado con este correo";
+                ProgramaFormacionDAO daoPrograma = new ProgramaFormacionDAO();
+                ViewBag.Programas = daoPrograma.Listar();
                 return View();
             }
 
             if (dao.ExisteDocumento(usuario.NumeroDocumento))
             {
                 ViewBag.TipoMensaje = "error";
-
-                ViewBag.Mensaje =
-                    "Ya existe un usuario registrado con este número de documento";
-
-                ProgramaFormacionDAO daPrograma =
-                    new ProgramaFormacionDAO();
-
-                ViewBag.Programas = daPrograma.Listar();
-
+                ViewBag.Mensaje = "Ya existe un usuario registrado con este número de documento";
+                ProgramaFormacionDAO daoPrograma = new ProgramaFormacionDAO();
+                ViewBag.Programas = daoPrograma.Listar();
                 return View();
             }
 
             bool registrado = dao.Registrar(usuario);
-
-            ProgramaFormacionDAO daoPrograma = new ProgramaFormacionDAO();
-
-            ViewBag.Programas = daoPrograma.Listar();
+            ProgramaFormacionDAO daoProg = new ProgramaFormacionDAO();
+            ViewBag.Programas = daoProg.Listar();
 
             if (registrado)
-            {
                 ViewBag.Mensaje = "Usuario registrado correctamente";
-            }
             else
-            {
                 ViewBag.Mensaje = "Error al registrar usuario";
-            }
 
             return View();
         }
-
-
-       
-        // LOGIN
-        
 
         [HttpGet]
         public ActionResult Login()
@@ -91,11 +64,7 @@ namespace EventPlanner.Web.Controllers
         public ActionResult Login(LoginViewModel modelo)
         {
             UsuarioDAO dao = new UsuarioDAO();
-
-            Usuario usuario = dao.Login(
-                modelo.Correo,
-                modelo.Contrasena
-            );
+            Usuario usuario = dao.Login(modelo.Correo, modelo.Contrasena);
 
             if (usuario != null)
             {
@@ -105,23 +74,24 @@ namespace EventPlanner.Web.Controllers
 
                 if (usuario.Rol == "ADMIN")
                 {
-                    return RedirectToAction(
-                        "Index",
-                        "Home"
-                    );
+                    return RedirectToAction("Dashboard", "Admin");
                 }
 
-                return RedirectToAction(
-                    "Index",
-                    "Home"
-                );
+                return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Mensaje =
-                "Correo o contraseña incorrectos";
-
+            ViewBag.Mensaje = "Correo o contraseña incorrectos";
             return View();
         }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login", "Usuario");
+        }
     }
+<<<<<<< HEAD
 }
 // prueba de commit para verificar la funcionalidad del SP-1 en el SP-2
+=======
+}
+>>>>>>> bc9d814 (feat: funcionalidades sprint 2 casi listas)

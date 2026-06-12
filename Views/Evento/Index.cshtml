@@ -1,0 +1,111 @@
+﻿@model List<EventPlanner.Web.Models.Evento>
+
+@{
+    ViewBag.Title = "Eventos";
+}
+
+<div class="container mt-4">
+
+    <h2>Gestión de Eventos</h2>
+
+    <hr />
+
+    <a href="@Url.Action("Crear","Evento")"
+       class="btn btn-success mb-3">
+        Nuevo Evento
+    </a>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    <table class="table table-bordered table-hover">
+
+        <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Evento</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Modalidad</th>
+                <th>Lugar</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.idEvento</td>
+
+                    <td>@item.NombreEvento</td>
+
+                    <td>@item.NombreTipoEvento</td>
+
+                    <td>
+                        @item.FechaEvento.ToString("dd/MM/yyyy")
+                    </td>
+
+                    <td>@item.Modalidad</td>
+
+                    <td>@item.Lugar</td>
+
+                    <td>
+
+                        @if (item.Activo)
+                        {
+                            <span class="badge bg-success">
+                                Activo
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">
+                                Inactivo
+                            </span>
+                        }
+
+                    </td>
+
+                    <td>
+
+                        <a href="@Url.Action("Editar","Evento",
+                        new { id = item.idEvento })"
+                           class="btn btn-warning btn-sm">
+
+                            Editar
+
+                        </a>
+
+                        <a href="@Url.Action("CambiarEstado","Evento",
+                        new { id = item.idEvento })"
+                           class="btn btn-secondary btn-sm">
+
+                            Estado
+
+                        </a>
+                         
+                        <a href="@Url.Action("Eliminar","Evento", new { id = item.idEvento })"
+                           class="btn btn-danger btn-xs"
+                           onclick="return confirm('¿Está seguro de eliminar este evento?')">
+                            Eliminar
+                        </a>
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

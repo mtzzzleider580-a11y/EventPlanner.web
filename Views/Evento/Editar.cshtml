@@ -1,0 +1,142 @@
+﻿@model EventPlanner.Web.Models.Evento
+
+@using EventPlanner.Web.Models
+
+@{
+    ViewBag.Title = "Editar Evento";
+    var tipos = ViewBag.TiposEvento as List<TipoEvento>;
+}
+
+<div class="container mt-4">
+
+    <h2>Editar Evento</h2>
+    <hr />
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Mensaje
+        </div>
+    }
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(m => m.idEvento)
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label>Tipo Evento</label>
+                <select name="idTipoEvento" class="form-control" required>
+                    <option value="">Seleccione</option>
+                    @foreach (var item in tipos)
+                    {
+                        <option value="@item.idTipoEvento"
+                                @(Model.idTipoEvento == item.idTipoEvento ? "selected" : "")>
+                            @item.NombreTipoEvento
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Nombre Evento</label>
+                <input type="text" name="NombreEvento"
+                       value="@Model.NombreEvento"
+                       class="form-control" required />
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label>Descripción</label>
+            <textarea name="Descripcion" class="form-control" rows="3"
+                      required>@Model.Descripcion</textarea>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <label>Modalidad</label>
+                <select name="Modalidad" class="form-control" required>
+                    <option value="">Seleccione</option>
+                    <option value="INDIVIDUAL"
+                            @(Model.Modalidad == "INDIVIDUAL" ? "selected" : "")>
+                        INDIVIDUAL
+                    </option>
+                    <option value="EQUIPO"
+                            @(Model.Modalidad == "EQUIPO" ? "selected" : "")>
+                        EQUIPO
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label>Lugar</label>
+                <input type="text" name="Lugar"
+                       value="@Model.Lugar"
+                       class="form-control" required />
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <label>Fecha Evento</label>
+                <input type="date" name="FechaEvento"
+                       value="@Model.FechaEvento.ToString("yyyy-MM-dd")"
+                       class="form-control" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>Hora Inicio</label>
+                <input type="time" name="HoraInicio"
+                       value="@Model.HoraInicio.ToString(@"hh\:mm")"
+                       class="form-control" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>Hora Fin</label>
+                <input type="time" name="HoraFin"
+                       value="@Model.HoraFin.ToString(@"hh\:mm")"
+                       class="form-control" required />
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-3">
+                <label>Cupos Totales</label>
+                <input type="number" name="CuposTotales"
+                       value="@Model.CuposTotales"
+                       class="form-control" min="1" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>Inicio Inscripción</label>
+                <input type="date" name="FechaInicioInscripcion"
+                       value="@Model.FechaInicioInscripcion.ToString("yyyy-MM-dd")"
+                       class="form-control" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>Fin Inscripción</label>
+                <input type="date" name="FechaFinInscripcion"
+                       value="@Model.FechaFinInscripcion.ToString("yyyy-MM-dd")"
+                       class="form-control" required />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-warning">
+            Actualizar Evento
+        </button>
+
+        <a href="@Url.Action("Index","Evento")" class="btn btn-secondary">
+            Volver
+        </a>
+    }
+
+</div>

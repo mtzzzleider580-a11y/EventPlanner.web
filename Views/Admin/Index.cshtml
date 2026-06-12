@@ -1,0 +1,82 @@
+﻿@model List<EventPlanner.Web.Models.Evento>
+
+@{
+    ViewBag.Title = "Eventos";
+}
+
+<div class="container mt-4">
+
+    <h2>Gestión de Eventos</h2>
+    <hr />
+
+    <a href="@Url.Action("Crear","Evento")" class="btn btn-success mb-3">
+        Nuevo Evento
+    </a>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead class="info">
+            <tr>
+                <th>ID</th>
+                <th>Evento</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Modalidad</th>
+                <th>Lugar</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.idEvento</td>
+                    <td>@item.NombreEvento</td>
+                    <td>@item.NombreTipoEvento</td>
+                    <td>@item.FechaEvento.ToString("dd/MM/yyyy")</td>
+                    <td>@item.Modalidad</td>
+                    <td>@item.Lugar</td>
+                    <td>
+                        @if (item.Activo)
+                        {
+                            <span class="label label-success">Activo</span>
+                        }
+                        else
+                        {
+                            <span class="label label-danger">Inactivo</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Editar","Evento", new { id = item.idEvento })"
+                           class="btn btn-warning btn-xs">
+                            Editar
+                        </a>
+
+                        <a href="@Url.Action("CambiarEstado","Evento", new { id = item.idEvento })"
+                           class="btn btn-default btn-xs">
+                            Estado
+                        </a>
+
+                        <form action="@Url.Action("Eliminar","Evento")" method="post"
+                              style="display:inline"
+                              onsubmit="return confirm('¿Está seguro de eliminar este evento?')">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@item.idEvento" />
+                            <button type="submit" class="btn btn-danger btn-xs">
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
