@@ -1,0 +1,36 @@
+﻿@model List<EventPlanner.Web.Models.Evento>
+
+@{
+    ViewBag.Title = "Eventos Disponibles";
+}
+
+<h2>Eventos Disponibles</h2>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>Evento</th>
+        <th>Tipo</th>
+        <th>Fecha</th>
+        <th>Hora Inicio</th>
+        <th>Hora Fin</th>
+        <th>Cupos</th>
+        <th>Modalidad</th>
+        <th>Lugar</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.NombreEvento</td>
+            <td>@item.NombreTipoEvento</td>
+            <td>@item.FechaEvento.ToShortDateString()</td>
+            <td>@item.HoraInicio</td>
+            <td>@item.HoraFin</td>
+            <td>@item.CuposTotales</td>
+            <td>@item.Modalidad</td>
+            <td>@item.Lugar</td>
+        </tr>
+    }
+
+</table>

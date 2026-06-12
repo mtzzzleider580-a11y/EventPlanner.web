@@ -120,14 +120,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Data\Conexion.cs" />
+    <Compile Include="Data\EventoDAO.cs" />
     <Compile Include="Data\ProgramaFormacionDAO.cs" />
     <Compile Include="Data\UsuarioDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Evento.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ProgramaFormacion.cs" />
     <Compile Include="Models\Usuario.cs" />
@@ -217,6 +221,7 @@
     <Content Include="packages\bootstrap.5.2.3\content\Scripts\bootstrap.esm.min.js" />
     <Content Include="packages\bootstrap.5.2.3\content\Scripts\bootstrap.js" />
     <Content Include="packages\bootstrap.5.2.3\content\Scripts\bootstrap.min.js" />
+    <Content Include="git" />
     <None Include="packages\jQuery.3.7.0\Content\Scripts\jquery-3.7.0-vsdoc.js" />
     <Content Include="packages\jQuery.3.7.0\Content\Scripts\jquery-3.7.0.js" />
     <Content Include="packages\jQuery.3.7.0\Content\Scripts\jquery-3.7.0.min.js" />
@@ -514,7 +519,14 @@
     <Content Include="Scripts\jquery-3.7.0.min.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.js" />
     <Content Include="Scripts\jquery-3.7.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.map" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-3.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.7.1.js" />
+    <Content Include="Scripts\jquery-3.7.1.min.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.js" />
+    <Content Include="Scripts\jquery-3.7.1.slim.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -538,6 +550,8 @@
     <Content Include="ViewModels\.gitkeep" />
     <Content Include="Views\Usuario\Registro.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
+    <Content Include="Views\Evento\Disponibles.cshtml" />
+    <Content Include="Views\Menu\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="01_Documentacion\Evidencias sprint 0-4\Sprint 1\evidencia del sprint 1\" />

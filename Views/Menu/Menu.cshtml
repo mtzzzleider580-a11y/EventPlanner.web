@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Menú Principal";
+}
+
+<style>
+
+    body {
+        font-family: Segoe UI;
+        background: #f5f7f6;
+    }
+
+    .header {
+        background: #00843D;
+        color: white;
+        padding: 20px;
+    }
+
+    .usuario {
+        float: right;
+        font-weight: bold;
+    }
+
+    .contenedor {
+        width: 900px;
+        margin: auto;
+        margin-top: 40px;
+    }
+
+    .titulo {
+        text-align: center;
+        color: #0B6E4F;
+    }
+
+    .tarjetas {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .tarjeta {
+        width: 250px;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px #ccc;
+        text-align: center;
+    }
+
+    .boton {
+        display: inline-block;
+        margin-top: 20px;
+        background: #00843D;
+        color: white;
+        padding: 12px 25px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+        .boton:hover {
+            background: #09553d;
+        }
+</style>
+
+<div class="header">
+
+    EventPlanner
+
+    <span class="usuario">
+        @Session["NombreUsuario"]
+    </span>
+
+</div>
+
+<div class="contenedor">
+
+    <h1 class="titulo">
+        Menú Principal del Aprendiz
+    </h1>
+
+    <div class="tarjetas">
+
+        <div class="tarjeta">
+
+            <h3>Eventos Disponibles</h3>
+
+            <p>
+                Consulta los eventos abiertos para inscripción.
+            </p>
+
+            <a href="/Evento/Disponibles" class="boton">
+                Ver Eventos
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
