@@ -99,26 +99,23 @@ namespace EventPlanner.Web.Controllers
 
             if (usuario != null)
             {
-                Session["idUsuario"] = usuario.idUsuario;
-                Session["Nombre"] = usuario.NombreCompleto;
-                Session["Rol"] = usuario.Rol;
-
-                if (usuario.Rol == "ADMIN")
+                if (usuario.Rol != "APRENDIZ")
                 {
-                    return RedirectToAction(
-                        "Index",
-                        "Home"
-                    );
+                    ViewBag.Mensaje =
+                    "Este usuario no se reconoce como aprendiz.";
+
+                    return View();
                 }
 
-                return RedirectToAction(
-                    "Index",
-                    "Home"
-                );
+                Session["NombreUsuario"] = usuario.NombreCompleto;
+                Session["IdUsuario"] = usuario.idUsuario;
+                Session["Rol"] = usuario.Rol;
+
+                return RedirectToAction("Menu", "Menu");
             }
 
             ViewBag.Mensaje =
-                "Correo o contraseña incorrectos";
+            "Correo o contraseña incorrectos";
 
             return View();
         }

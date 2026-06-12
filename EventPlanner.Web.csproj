@@ -122,16 +122,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\EventoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InscripcionController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Data\Conexion.cs" />
     <Compile Include="Data\EventoDAO.cs" />
+    <Compile Include="Data\InscripcionDAO.cs" />
     <Compile Include="Data\ProgramaFormacionDAO.cs" />
     <Compile Include="Data\UsuarioDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Evento.cs" />
+    <Compile Include="Models\Inscripcion.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ProgramaFormacion.cs" />
     <Compile Include="Models\Usuario.cs" />
